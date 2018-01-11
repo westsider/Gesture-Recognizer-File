@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var fileImageView: UIImageView!
     
     @IBOutlet weak var trashImageView: UIImageView!
@@ -22,42 +22,53 @@ class ViewController: UIViewController {
         fileViewOrigin = fileImageView.frame.origin
         view.bringSubview(toFront: fileImageView)
     }
-
+    
     func addPanGesture(view: UIView) {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(ViewController.handlePan(sender:)))
         view.addGestureRecognizer(pan)
     }
-
+    
     @objc func handlePan(sender:UIPanGestureRecognizer) {
         
         let fileView = sender.view!
-        let translation = sender.translation(in: view)
-        
+
         switch sender.state {
         case .began, .changed:
+            moveViewWithPan(view: fileView, sender: sender)
             
-            fileView.center = CGPoint(x: fileView.center.x + translation.x, y: fileView.center.y + translation.y)
-            sender.setTranslation(CGPoint.zero, in: view)
         case .ended:
-            
             if fileView.frame.intersects(trashImageView.frame) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.fileImageView.alpha = 0.0
-                })
-                
+                deleteView(view: fileView)
             } else {
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.fileImageView.frame.origin = self.fileViewOrigin
-                })
+                returnViewToOrigin(view: fileView)
             }
-            
+
         default:
             break
         }
     }
     
-    func 
-
+    func moveViewWithPan(view: UIView, sender:UIPanGestureRecognizer ) {
+        
+        let translation = sender.translation(in: view)
+        view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+        sender.setTranslation(CGPoint.zero, in: view)
+    }
+    
+    func returnViewToOrigin(view: UIView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            view.frame.origin = self.fileViewOrigin
+        })
+    }
+    
+    func deleteView(view: UIView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            view.alpha = 0.0
+        })
+        
+    }
 }
+
 

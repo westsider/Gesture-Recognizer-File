@@ -54,11 +54,11 @@
 		0D70043720073A5E00FD6555 /* Gesture Recognizer File */ = {
 			isa = PBXGroup;
 			children = (
-				0D70043820073A5E00FD6555 /* AppDelegate.swift */,
-				0D70043A20073A5E00FD6555 /* ViewController.swift */,
 				0D70043C20073A5E00FD6555 /* Main.storyboard */,
+				0D70043A20073A5E00FD6555 /* ViewController.swift */,
 				0D70043F20073A5E00FD6555 /* Assets.xcassets */,
 				0D70044120073A5E00FD6555 /* LaunchScreen.storyboard */,
+				0D70043820073A5E00FD6555 /* AppDelegate.swift */,
 				0D70044420073A5E00FD6555 /* Info.plist */,
 			);
 			path = "Gesture Recognizer File";
